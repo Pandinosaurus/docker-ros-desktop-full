@@ -12,7 +12,10 @@ RUN sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF
 # Installing ROS
 RUN sudo apt-get update && sudo apt-get install -y ros-melodic-desktop-full \
 		wget git nano
-RUN rosdep init && rosdep update
+RUN sudo apt install python-rosdep
+RUN sudo rosdep init && rosdep update
+RUN sudo rosdep fix-permissions
+RUN rosdep update
 
 RUN /bin/bash -c "echo 'export HOME=/home/ubuntu' >> /root/.bashrc && source /root/.bashrc"
 
